@@ -1,0 +1,35 @@
+summary: Altera a informação de uma escola.
+description: |+
+  Altera a informação de uma escola. 
+
+  Apenas o administrador pode realizar esta alteração. 
+tags:
+  - Escolas
+security:
+  - tokenQuery: []
+parameters:
+  - in: path
+    name: codigo
+    schema:
+      type: string
+    description: "Código da escola a ser alterada."
+    required: true
+requestBody:
+  description: 'Informações a serem alteradas.'
+  required: true
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        $ref: '#/components/schemas/EscolaPUT'
+    application/json:
+      schema:
+        $ref: '#/components/schemas/EscolaPUT'
+responses:
+  200:
+    description: Escola alterada com sucesso.
+  401:
+    $ref: '#/components/responses/UnauthorizedToken'
+  403:
+    $ref: '#/components/responses/PermissionsUser'
+  500:
+    description: Erro.

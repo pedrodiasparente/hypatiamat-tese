@@ -1,0 +1,21 @@
+type: object
+properties:
+  numero:
+    type: integer
+  nome:
+    type: string
+  datanascimento:
+    type: string
+    format: date
+  email:
+    type: string
+  confirmacao:
+    type: integer
+    enum: [1, 0]
+required:
+  - numero
+  - nome
+  - email
+  - datanascimento
+  - email
+  - confirmacao

@@ -1,0 +1,93 @@
+version: '3.0'
+
+services:
+  kong:
+    container_name: kong
+    restart: always
+    image: kong:latest
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml
+    environment:
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative/kong.yml
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_ADMIN_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl
+    ports:
+      - "8001:8001"
+      - "8000:8000"
+
+  api-dados:
+    build:
+      network: host
+      context: ./Hypatiamat-BackOffice/apiDados
+    container_name: api-dados
+    restart: always
+    image: api:latest
+    ports:
+      - "3050:3050"
+    networks:
+      - backend
+
+  interface-app:
+    build:
+      context: ./Hypatiamat-BackOffice/interface
+    container_name: interface-app
+    restart: always
+    image: interface:latest
+    depends_on:
+      - "api-dados"
+    ports:
+      - "8080:8080"
+    networks:
+      - frontend
+
+  api-auth:
+    build:
+      network: host
+      context: ./Auth/backend
+    container_name: api-auth
+    restart: always
+    ports:
+      - "9000:9000"
+    networks:
+      - backend
+
+  auth-app:
+    build:
+      context: ./Auth/frontend
+    container_name: auth-app
+    restart: always
+    depends_on:
+      - "api-auth"
+    ports:
+      - "12090:12090"
+    networks:
+      - frontend
+
+  tpc-app:
+    build:
+      context: ./Hypatiamat-TPC/frontend
+    container_name: tpc-app
+    restart: always
+    depends_on:
+      - "strapi"
+    ports:
+      - "8081:8081"
+    networks:
+      - frontend
+
+  strapi:
+    #image: strapi/strapi
+    container_name: strapi
+    restart: always
+    build:
+      context: ./Hypatiamat-TPC/backend
+    ports:
+      - "3052:3052"
+
+networks:
+  backend:
+  frontend:

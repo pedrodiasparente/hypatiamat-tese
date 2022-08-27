@@ -1,0 +1,24 @@
+summary: Lista todos os códigos de confirmação.
+description: |+
+  Devolve todos os códigos de confirmação presentes na BD.
+  
+  Apenas o administrador pode executar este pedido.
+tags:
+  - Códigos de Professor
+security:
+  - tokenQuery: []
+responses:
+  200:
+    description: Lista de todos os códigos.
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodigosProfGET'
+  401:
+    $ref: '#/components/responses/UnauthorizedToken'
+  403:
+    $ref: '#/components/responses/PermissionsUser'
+  500:
+    description: Erro.

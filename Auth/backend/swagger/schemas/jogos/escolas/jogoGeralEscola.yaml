@@ -1,0 +1,23 @@
+type: array
+description: 'Um jogo selecionado.'
+items:
+  type: object
+  properties:
+    codprofessor:
+      type: string
+      description: 'Código do professor.'
+    nome:
+      type: string
+      description: 'Nome do professor.'
+    min:
+      type: integer
+      description: 'Pontuação mínima das turmas do professor no jogo.'
+    max:
+      type: integer
+      description: 'Pontuação máxima das turmas do professor no jogo.'
+    media:
+      type: integer
+      description: 'Pontuação média das turmas do professor no jogo.'
+    number:
+      type: integer
+      description: 'Frequência das turmas do professor no jogo.'
