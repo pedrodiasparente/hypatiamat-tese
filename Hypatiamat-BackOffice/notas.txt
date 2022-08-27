@@ -1,0 +1,126 @@
+hypati_samd => jogosdb
+appsinfoall
+
+admin => premium = 5 
+(type = 50)
+
+username: admin
+password: 123456
+----------------------------------------------
+aluno 
+(type = 10)
+
+username: aluno1	/ mtbc191a201
+password: 123123	/ 123401
+----------------------------------------------
+professor => premium = 1
+(type = 20)
+
+username: hprof1/hprof2
+password: 123123
+----------------------------------------------
+municipio => premium = 2 (ainda não criado)
+(type = 30)
+
+username: mun01
+password: 123456
+----------------------------------------------
+agrupamento => premium = 3 (ainda não criado)
+(type = 40)
+
+username: agru01
+password: 123456
+----------------------------------------------
+Janeiro:
+levantamento de outras platformas de suporte ao ensino matemática
+contexto
+o que estava feito / alternativo
+
+----
+
+Estatisticas por cada jogo por municipio
+
+
+----------------------------------------
+
+--------------------------
+nº de ciclos bcrypt: 5;  |
+algoritmo: XA-256        |
+-------------------------- 
+
+mudar todas as labels de escola para agrupamento
+colocar label de localidade no criar turma
+ADMIN => pode criar mais que 4 turmas
+colocar agrupamento na escolha de turma a transferir alunos
+
+
+Municipio/Agrupamento => Estatisticas (por ano letivo):
+nº de turmas no ano letivo;
+nº de professores;
+nº de alunos;
+nº de tarefas;
+frequência nas apps;
+nº de jogos;
+frequência nos jogos;
+
+Jogos diferentes:
+- calculus;
+- calcrapid;
+Gráfico:
+Eixo x -> número dos alunos
+Eixo y -> pontuações médias
+Série -> três períodos de tempo
+
+
+					Lista de Tarefas:
+
+Agrupamento => Professores => Turmas => Monitorização de Jogos e Aplicações
+chartjs
+
+
+APPS
+subtemas (código do subtema)
+potencias não
+polignos agrupar
+quadrilateros agrupar
+angulos agrupar
+teorema de pitagoras agrupar
+perimetros agrupar
+raiz quadrada agrupar
+funções primeiro grau agrupar
+equacoes 2 grau agrupar
+inequações agrupar
+multiplos e divisores agrupar
+gráficos de funções afins agrupar
+
+No admin:
+sql:
+Estatistica Hypatiamat
+(puder aparecer uma lista por munícipios (Braga, etc) nº de tarefas certas, nº total, frequencia, onPeak, offPeak)apps
+(nº de jogos que o municipio fez)
+Estatisca Municipios (feito)
+Estatistica Escolas
+Estaticas Professor
+
+_____________________________
+
+nº de jogos => jogos jogados
+jogos do aluno => posição na turma, posição na escola
+apps => apenas a partir de 20/21 (colocar uma nota 
+apps estatisticas municipio => nº de tarefas e nº de tarefas resolvida
+Apps de conteúdos das turmas registadas em 20/21
+Apps de conteúdos de todas as turmas 
+
+colocar lista em vez do quadro em estatisticas globais no municipio
+colocar o nº em maior evidência
+
+
+colocar legendas nas tabelas apps
+exportação pdf nas apps.
+
+criar uma tabela de parametros. (nº de turmas)
+logo pdf mais pequeno.
+queries estatisticas apps => order by frequencia
+exportar csv => apps e jogos
+
+Estatisticas:

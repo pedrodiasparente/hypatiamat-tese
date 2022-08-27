@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "connection": "aplicacoes",
+  "collectionName": "Escolas",
+  "info": {
+    "name": "Escola",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "cod": {
+      "type": "string"
+    },
+    "localidade": {
+      "type": "string"
+    },
+    "distrito": {
+      "type": "string"
+    },
+    "pais": {
+      "type": "string"
+    }
+  }
+}

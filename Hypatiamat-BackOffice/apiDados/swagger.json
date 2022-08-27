@@ -1,0 +1,1500 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Api Hypatiamat",
+        "description": "Aqui encontra-se a documentação de toda a api de dados do Hypatiamat, incluindo todas as rotas e toda a informação à cerca do que é precisar passar como parâmetros, bem como os resultados que se podem esperar ao executar aquela rota."
+    },
+    "schemes": [
+        "http"
+    ],
+    "host": "localhost:3050",
+    "basePath": "/",
+    "tags": [
+        {
+          "name": "Alunos",
+          "description": "Todas as operações à cerca de alunos."
+        },
+        {
+          "name": "Professores",
+          "description": "Todas as operações à cerca de professores."
+        },
+        {
+          "name": "Escolas",
+          "description": "Todas as operações à cerca de escolas."
+        },
+        {
+            "name": "Turmas",
+            "description": "Todas as operações à cerca de turmas."
+        }
+      ],
+    "paths": {
+        "/aplicacoes/login":{
+          "post":{
+            "tags":[
+                "Professores",
+                "Alunos"
+            ],
+            "summary": "Autenticar um professor ou aluno.",
+            "description": "Autenticação de um utilizador.",
+            "parameters": [
+                {
+                  "name": "user",
+                  "in": "formData",
+                  "description": "Código/Username de um professor/aluno",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "password",
+                  "in": "formData",
+                  "description": "Password do professor/aluno",
+                  "required": true,
+                  "type": "string",
+                  "format": "password"
+                }
+              ],
+            "responses": {
+                "200": {
+                    "description": "Retorna o token de acesso e o tipo de acesso caso as credenciais sejam válidas",
+                    "schema": {
+                        "type": "object",
+                            "properties": {
+                                "authentication": {
+                                    "type": "boolean"
+                                },
+                                "token":{
+                                  "type": "string"
+                                },
+                                "type":{
+                                  "type": "integer"
+                                }
+                            }
+                        }
+                }
+            }
+          }
+        },
+        "/aplicacoes/professores": {
+            "get": {
+                "tags":[
+                    "Professores"
+                ],
+                "summary": "Todos os professores registados.",
+                "description": "Retorna uma lista com toda informação à cerca de todos os professores.",
+                "responses": {
+                    "200": {
+                        "description": "Lista de Professores",
+                        "schema": {
+                          "type":"array",
+                          "items":{
+                            "$ref": "#/definitions/Professor"
+                          }
+                        }
+                    },
+                    "401":{
+                      "description": "Falta-lhe o token de acesso ou o token não é válido."
+                    }
+                },
+                "security": [
+                  {
+                    "api_key": []
+                  }
+                ]
+            },
+            "post":{
+                "tags":[
+                    "Professores"
+                ],
+                "summary": "Inserir um novo professor.",
+                "description": "Adiciona um novo curso à base de dados.",
+                "parameters": [
+                    {
+                      "name": "codigo",
+                      "in": "formData",
+                      "description": "Código/Username de um professor",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                      "name": "nome",
+                      "in": "formData",
+                      "description": "Nome do professor",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                      "name": "escola",
+                      "in": "formData",
+                      "description": "Identificador da escola do professor",
+                      "required": true,
+                      "type": "integer"
+                    },
+                    {
+                      "name": "email",
+                      "in": "formData",
+                      "description": "Email do professor",
+                      "required": true,
+                      "type": "string"
+                    },{
+                      "name": "password",
+                      "in": "formData",
+                      "description": "Password do professor",
+                      "required": true,
+                      "type": "string",
+                      "format": "password"
+                    },{
+                      "name": "confirmacao",
+                      "in": "formData",
+                      "description": "0 se o professor não está confirmado, 1 caso contrário",
+                      "required": true,
+                      "type": "integer"
+                    },{
+                      
+                      "name": "premium",
+                      "in": "formData",
+                      "description": "Nível de acesso",
+                      "required": true,
+                      "type": "integer"
+                    },{
+                      "name": "socionum",
+                      "in": "formData",
+                      "description": "Número de sócio do professor",
+                      "required": true,
+                      "type": "integer"
+                    },{
+                      "name": "validade",
+                      "in": "formData",
+                      "description": "Data em que a sua conta expira",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                      "name": "projeto",
+                      "in": "formData",
+                      "description": "Projeto",
+                      "required": true,
+                      "type": "integer"
+                    }
+
+                  ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna o id do professor criado",
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/aplicacoes/professores/{codigoProf}": {
+            "get": {
+              "tags": [
+                "Professores"
+              ],
+              "summary": "Dado um código de um professor, devolve toda a informação relativa a esse professor.",
+              "description": "Devolve toda a informação relativa a um professor.",
+              "operationId": "getProfessorByCodigo",
+              "parameters": [
+                {
+                  "name": "codigoProf",
+                  "in": "path",
+                  "description": "Código do professor a retornar.",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                    "description": "Retorna a informação relativa a um professor.",
+                    "schema": {
+                        "$ref": "#/definitions/Professor"   
+                        }
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                },
+                "403":{
+                  "description": "Não possuí nível de acesso suficiente."
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+            },
+            "put":{
+              "tags": [
+                "Professores"
+              ],
+              "summary": "Dado um código de um professor, edite a informação relacionada com ele.",
+              "description": "Editar um professor.",
+              "operationId": "putProfessorByCodigo",
+              "parameters": [
+                {
+                  "name": "codigoProf",
+                  "in": "path",
+                  "description": "Código/Username de um professor",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "nome",
+                  "in": "formData",
+                  "description": "Nome do professor",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "escola",
+                  "in": "formData",
+                  "description": "Identificador da escola do professor",
+                  "required": true,
+                  "type": "integer"
+                },
+                {
+                  "name": "email",
+                  "in": "formData",
+                  "description": "Email do professor",
+                  "required": true,
+                  "type": "string"
+                },{
+                  "name": "password",
+                  "in": "formData",
+                  "description": "Password do professor",
+                  "required": true,
+                  "type": "string"
+                },{
+                  "name": "confirmacao",
+                  "in": "formData",
+                  "description": "0 se o professor não está confirmado, 1 caso contrário",
+                  "required": true,
+                  "type": "integer"
+                },{
+                  
+                  "name": "premium",
+                  "in": "formData",
+                  "description": "1 se o professor é premium, 0 caso contrário",
+                  "required": true,
+                  "type": "string"
+                },{
+                  "name": "socionum",
+                  "in": "formData",
+                  "description": "Número de sócio do professor",
+                  "required": true,
+                  "type": "integer"
+                },{
+                  "name": "validade",
+                  "in": "formData",
+                  "description": "Data em que a sua conta expira",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "O professor foi editado."
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                },
+                "403":{
+                  "description": "Não possuí nível de acesso suficiente."
+                }
+              },
+                "security": [
+                  {
+                    "api_key": []
+                  }
+                ]
+            },
+            "delete": {
+              "tags": [
+                "Professores"
+              ],
+              "summary": "Dado um código de professor, elimine o professor da base de dados.",
+              "description": "Apagar um professor.",
+              "operationId": "deleteProfessorByCodigo",
+              "parameters": [
+                {
+                  "name": "codigoProf",
+                  "in": "path",
+                  "description": "Código do professor a apagar.",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "O professor foi eliminado."
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                },
+                "403":{
+                  "description": "Não possuí nível de acesso suficiente."
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+              
+            }
+        },
+        "/aplicacoes/professores/{idProf}/turmas": {
+            "get": {
+              "tags": [
+                "Professores"
+              ],
+              "summary": "Dado um identificador de um professor, devolve todas as suas turmas.",
+              "description": "Devolve todos as turmas de um professor.",
+              "operationId": "getTurmasProfessorByCodigo",
+              "parameters": [
+                {
+                  "name": "idProf",
+                  "in": "path",
+                  "description": "Id do professor a retornar.",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                      "description": "Lista de Turmas",
+                      "schema": {
+                        "type":"array",
+                        "items":{
+                          "$ref": "#/definitions/Turma"
+                        }
+                      }
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+            }
+        },
+        "/aplicacoes/professores/{codigoProf}/password": {
+            "put": {
+              "tags": [
+                "Professores"
+              ],
+              "summary": "Dado um código de um professor, edita-se a sua palavra passe.",
+              "description": "Editar a password de um professor.",
+              "operationId": "putPasswordProfessorByCodigo",
+              "parameters": [
+                {
+                  "name": "codigoProf",
+                  "in": "path",
+                  "description": "Código do professor a editar.",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "password",
+                  "in": "formData",
+                  "description": "Nova palavra passe.",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                    "description": "Palavra passe editada com sucesso."
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+            }
+          },
+          "/aplicacoes/alunos": {
+            "get": {
+                "tags":[
+                    "Alunos"
+                ],
+                "summary": "Todos os alunos registados.",
+                "description": "Retorna uma lista com a informação à cerca de todos os alunos.",
+                "responses": {
+                    "200": {
+                        "description": "Lista de Alunos",
+                        "schema": {
+                          "type":"array",
+                          "items":{
+                            "$ref": "#/definitions/Aluno"
+                          }
+                        }
+                    },
+                    "401":{
+                      "description": "Falta-lhe o token de acesso ou o token não é válido."
+                    }
+                },
+                "security": [
+                  {
+                    "api_key": []
+                  }
+                ]
+            },
+            "post":{
+                "tags":[
+                    "Alunos"
+                ],
+                "summary": "Inserir um novo aluno.",
+                "description": "Adiciona um novo aluno à base de dados.",
+                "parameters": [
+                    {
+                      "name": "user",
+                      "in": "formData",
+                      "description": "Código/Username do aluno",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                      "name": "numero",
+                      "in": "formData",
+                      "description": "Número do aluno",
+                      "required": true,
+                      "type": "integer"
+                    },
+                    {
+                      "name": "nome",
+                      "in": "formData",
+                      "description": "Nome do aluno",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                      "name": "datanascimento",
+                      "in": "formData",
+                      "description": "Data de nascimento do aluno",
+                      "required": true,
+                      "type": "integer"
+                    },
+                    {
+                      "name": "escola",
+                      "in": "formData",
+                      "description": "Identificador da escola do aluno",
+                      "required": true,
+                      "type": "integer"
+                    },
+                    {
+                      "name": "turma",
+                      "in": "formData",
+                      "description": "Turma do aluno",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                      "name": "email",
+                      "in": "formData",
+                      "description": "Email do aluno",
+                      "required": true,
+                      "type": "string"
+                    },{
+                      "name": "password",
+                      "in": "formData",
+                      "description": "Password do aluno",
+                      "required": true,
+                      "type": "string",
+                      "format": "password"
+                    },{
+                      "name": "codprofessor",
+                      "in": "formData",
+                      "description": "Código de acesso fornecido pelo professor",
+                      "required": true,
+                      "type": "string"
+                    },{
+                      
+                      "name": "pais",
+                      "in": "formData",
+                      "description": "País do aluno",
+                      "required": true,
+                      "type": "string"
+                    },{
+                      "name": "confirmacao",
+                      "in": "formData",
+                      "description": "1 caso esteja confirmado, 0 caso contrário",
+                      "required": true,
+                      "type": "integer"
+                    }
+                  ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna o id do aluno criado",
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/aplicacoes/alunos/{idAluno}": {
+            "get": {
+              "tags": [
+                "Alunos"
+              ],
+              "summary": "Dado um identifcador de aluno, devolve toda a informação relativa a esse aluno.",
+              "description": "Devolve toda a informação relativa a um professor.",
+              "operationId": "getAlunoById",
+              "parameters": [
+                {
+                  "name": "idAluno",
+                  "in": "path",
+                  "description": "Identificador do aluno a retornar.",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "200": {
+                    "description": "Retorna a informação relativa a um aluno.",
+                    "schema": {
+                        "$ref": "#/definitions/Aluno"   
+                        }
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                },
+                "403":{
+                  "description": "Não possuí nível de acesso suficiente."
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+            },
+            "put":{
+              "tags": [
+                "Alunos"
+              ],
+              "summary": "Dado um identificador de um aluno, edite a informação relacionada com ele.",
+              "description": "Editar um aluno.",
+              "operationId": "putAlunoById",
+              "parameters": [
+                {
+                  "name": "idAluno",
+                  "in": "path",
+                  "description": "Identificador de um aluno.",
+                  "required": true,
+                  "type": "integer"
+                },
+                {
+                  "name": "numero",
+                  "in": "formData",
+                  "description": "Número do aluno",
+                  "required": true,
+                  "type": "integer"
+                },
+                {
+                  "name": "nome",
+                  "in": "formData",
+                  "description": "Nome do aluno",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "datanascimento",
+                  "in": "formData",
+                  "description": "Data de nascimento do aluno",
+                  "required": true,
+                  "type": "integer"
+                },
+                {
+                  "name": "email",
+                  "in": "formData",
+                  "description": "Email do aluno",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "confirmacao",
+                  "in": "formData",
+                  "description": "1 caso esteja confirmado, 0 caso contrário",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "O aluno foi editado."
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                },
+                "403":{
+                  "description": "Não possuí nível de acesso suficiente."
+                }
+              },
+                "security": [
+                  {
+                    "api_key": []
+                  }
+                ]
+            },
+            "delete": {
+              "tags": [
+                "Alunos"
+              ],
+              "summary": "Dado um identificador de aluno, elimine o aluno da base de dados.",
+              "description": "Apagar um aluno.",
+              "operationId": "deleteAlunoById",
+              "parameters": [
+                {
+                  "name": "idAluno",
+                  "in": "path",
+                  "description": "Identificador do aluno a apagar.",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "O aluno foi eliminado."
+                },
+                "401":{
+                  "description": "Falta-lhe o token de acesso ou o token não é válido."
+                },
+                "403":{
+                  "description": "Não possuí nível de acesso suficiente."
+                }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+              
+            }
+        },
+        "/aplicacoes/alunos/{idAluno}/password":{
+          "put":{
+            "tags": [
+              "Alunos"
+            ],
+            "summary": "Dado um identificador de um aluno, edite a password dele.",
+            "description": "Editar a password de um aluno.",
+            "operationId": "putPasswordAlunoById",
+            "parameters": [
+              {
+                "name": "idAluno",
+                "in": "path",
+                "description": "Identificador de um aluno.",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "password",
+                "in": "formData",
+                "description": "Nova password do aluno",
+                "required": true,
+                "type": "string",
+                "format": "password"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "A palavra passe do aluno foi alterada."
+              },
+              "401":{
+                "description": "Falta-lhe o token de acesso ou o token não é válido."
+              },
+              "403":{
+                "description": "Não possuí nível de acesso suficiente."
+              }
+            },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+          }
+        },
+        "/aplicacoes/alunos/{idAluno}/escola":{
+          "put":{
+            "tags": [
+              "Alunos"
+            ],
+            "summary": "Dado um identificador de um aluno, edite a escola dele.",
+            "description": "Editar a escola de um aluno.",
+            "operationId": "putEscolaAlunoById",
+            "parameters": [
+              {
+                "name": "idAluno",
+                "in": "path",
+                "description": "Identificador de um aluno.",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "escola",
+                "in": "formData",
+                "description": "Nova escola do aluno (identificador da escola)",
+                "required": true,
+                "type": "integer"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "A escola do aluno foi alterada."
+              },
+              "401":{
+                "description": "Falta-lhe o token de acesso ou o token não é válido."
+              },
+              "403":{
+                "description": "Não possuí nível de acesso suficiente."
+              }
+            },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+          }
+        },
+        "/aplicacoes/alunos/{idAluno}/turma":{
+          "put":{
+            "tags": [
+              "Alunos"
+            ],
+            "summary": "Dado um identificador de um aluno, edite a password dele.",
+            "description": "Editar a password de um aluno.",
+            "operationId": "putPasswordAlunoById",
+            "parameters": [
+              {
+                "name": "idAluno",
+                "in": "path",
+                "description": "Identificador de um aluno.",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "name": "turma",
+                "in": "formData",
+                "description": "Nova turma do aluno.",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "A turma do aluno foi alterada."
+              },
+              "401":{
+                "description": "Falta-lhe o token de acesso ou o token não é válido."
+              },
+              "403":{
+                "description": "Não possuí nível de acesso suficiente."
+              }
+            },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+          }
+        },
+        "/aplicacoes/escolas": {
+          "get": {
+              "tags":[
+                  "Escolas"
+              ],
+              "summary": "Todos as escolas registados.",
+              "description": "Retorna uma lista com a informação à cerca das escolas.",
+              "responses": {
+                  "200": {
+                      "description": "Lista de Escolas",
+                      "schema": {
+                        "type":"array",
+                        "items":{
+                          "$ref": "#/definitions/Escola"
+                        }
+                      }
+                  },
+                  "401":{
+                    "description": "Falta-lhe o token de acesso ou o token não é válido."
+                  }
+              },
+              "security": [
+                {
+                  "api_key": []
+                }
+              ]
+          },
+          "post":{
+              "tags":[
+                  "Escolas"
+              ],
+              "summary": "Inserir uma nova escola.",
+              "description": "Adiciona uma nova escola à base de dados.",
+              "parameters": [
+                  {
+                    "name": "nome",
+                    "in": "formData",
+                    "description": "Nome da escola",
+                    "required": true,
+                    "type": "string"
+                  },
+                  {
+                    "name": "localidade",
+                    "in": "formData",
+                    "description": "Localidade da escola",
+                    "required": true,
+                    "type": "string"
+                  },
+                  {
+                    "name": "distrito",
+                    "in": "formData",
+                    "description": "Distrito da escola",
+                    "required": true,
+                    "type": "string"
+                  },
+                  {
+                    "name": "pais",
+                    "in": "formData",
+                    "description": "País da escola",
+                    "required": true,
+                    "type": "string"
+                  },
+                  {
+                    "name": "cod",
+                    "in": "formData",
+                    "description": "Código da escola",
+                    "required": true,
+                    "type": "string"
+                  }
+                ],
+              "responses": {
+                  "200": {
+                      "description": "Retorna o id da escola criada",
+                      "schema": {
+                          "type": "string",
+                          "items": {
+                              "properties": {
+                                  "id": {
+                                      "type": "string"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/aplicacoes/escolas/{idEscola}":{
+        "get": {
+          "tags": [
+            "Escolas"
+          ],
+          "summary": "Dado um identifcador da escola, devolve a informação relativa a essa escola.",
+          "description": "Devolve a informação relativa a uma escola.",
+          "operationId": "getEscolaById",
+          "parameters": [
+            {
+              "name": "idEscola",
+              "in": "path",
+              "description": "Identificador da escola a retornar.",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Retorna a informação relativa a uma escola.",
+                "schema": {
+                    "$ref": "#/definitions/Escola"   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        },
+        "delete":{
+            "tags": [
+              "Escolas"
+            ],
+            "summary": "Dado um identifcador da escola, pode apagá-la.",
+            "description": "Apagar a informação da escola.",
+            "operationId": "deleteEscolaById",
+            "parameters": [
+              {
+                "name": "idEscola",
+                "in": "path",
+                "description": "Identificador da escola a apagar.",
+                "required": true,
+                "type": "integer"
+              }
+            ],
+            "responses": {
+              "200": {
+                  "description": "A escola foi apagada."
+              },
+              "401":{
+                "description": "Falta-lhe o token de acesso ou o token não é válido."
+              },
+              "403":{
+                "description": "Não possuí nível de acesso suficiente."
+              }
+            },
+            "security": [
+              {
+                "api_key": []
+              }
+            ]
+          }
+      },
+      "/aplicacoes/escolas/{idEscola}/alunos":{
+        "get": {
+          "tags": [
+            "Escolas"
+          ],
+          "summary": "Dado um identifcador da escola, devolve todos os alunos da escola.",
+          "description": "Devolve todos os alunos de uma escola.",
+          "operationId": "getAlunosByEscola",
+          "parameters": [
+            {
+              "name": "idEscola",
+              "in": "path",
+              "description": "Identificador da escola.",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Retorna todos os alunos da escola.",
+                "schema": {
+                    "type":"array",
+                    "items": {
+                      "$ref": "#/definitions/Aluno"
+                    }   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/aplicacoes/escolas/{idEscola}/professores":{
+        "get": {
+          "tags": [
+            "Escolas"
+          ],
+          "summary": "Dado um identifcador da escola, devolve todos os professores da escola.",
+          "description": "Devolve todos os professores de uma escola.",
+          "operationId": "getProfessoresByEscola",
+          "parameters": [
+            {
+              "name": "idEscola",
+              "in": "path",
+              "description": "Identificador da escola.",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Retorna todos os professores da escola.",
+                "schema": {
+                    "type":"array",
+                    "items": {
+                      "$ref": "#/definitions/Professor"
+                    }   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/aplicacoes/escolas/paises/{pais}":{
+        "get": {
+          "tags": [
+            "Escolas"
+          ],
+          "summary": "Dado um país, devolve todos escolas desse país.",
+          "description": "Devolve todos as escolas de um país.",
+          "operationId": "getEscolasbyPais",
+          "parameters": [
+            {
+              "name": "pais",
+              "in": "path",
+              "description": "Pais das escolas.",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Retorna todos as escolas do país.",
+                "schema": {
+                    "type":"array",
+                    "items": {
+                      "$ref": "#/definitions/Escola"
+                    }   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/aplicacoes/escolas/localidades/{localidade}":{
+        "get": {
+          "tags": [
+            "Escolas"
+          ],
+          "summary": "Dada uma localidade, devolve todas escolas dessa localidade.",
+          "description": "Devolve todos as escolas de uma localidade.",
+          "operationId": "getEscolasbyLocalidade",
+          "parameters": [
+            {
+              "name": "localidade",
+              "in": "path",
+              "description": "Localidade das escolas.",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Retorna todas as escolas da localidade.",
+                "schema": {
+                    "type":"array",
+                    "items": {
+                      "$ref": "#/definitions/Escola"
+                    }   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/aplicacoes/escolas/distritos/{distrito}":{
+        "get": {
+          "tags": [
+            "Escolas"
+          ],
+          "summary": "Dado um distrito, devolve todos escolas desse distrito.",
+          "description": "Devolve todos as escolas de um distrito.",
+          "operationId": "getEscolasbyDistrito",
+          "parameters": [
+            {
+              "name": "distrito",
+              "in": "path",
+              "description": "Distrito das escolas.",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Retorna todos as escolas do distrito.",
+                "schema": {
+                    "type":"array",
+                    "items": {
+                      "$ref": "#/definitions/Escola"
+                    }   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/aplicacoes/turmas/":{
+        "get": {
+          "tags": [
+            "Turmas"
+          ],
+          "summary": "Devolve todas as turmas do sistema.",
+          "description": "Retorna todas as turmas registadas.",
+          "operationId": "getTurmas",
+          "responses": {
+            "200": {
+                "description": "Retorna a lista de turmas.",
+                "schema": {
+                    "type": "array",
+                    "items":{
+                      "$ref": "#/definitions/Turma"
+                    }   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        },
+        "post":{
+          "tags": [
+            "Turmas"
+          ],
+          "summary": "Inserir uma nova turma.",
+          "description": "Criar uma nova turma.",
+          "operationId": "insertTurma",
+          "parameters": [
+            {
+              "name": "turma",
+              "in": "formData",
+              "description": "Nome da turma.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "idprofessor",
+              "in": "formData",
+              "description": "Código/Username do professor da turma.",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A turma foi criada e é devolvido o seu identificador.",
+              "schema": {
+                "type": "string",
+                "items": {
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        }
+                    }
+                }
+              }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/aplicacoes/turmas/{turma}":{
+        "get": {
+          "tags": [
+            "Turmas"
+          ],
+          "summary": "Dado o nome da turma, devolve a informação relativa a essa turma.",
+          "description": "Devolve a informação relativa a uma turma.",
+          "operationId": "getTurmaById",
+          "parameters": [
+            {
+              "name": "turma",
+              "in": "path",
+              "description": "Nome da turma a retornar.",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Retorna a informação relativa a uma turma.",
+                "schema": {
+                    "$ref": "#/definitions/Turma"   
+                    }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        },
+        "delete":{
+            "tags": [
+              "Turmas"
+            ],
+            "summary": "Dado um identifcador da turma, pode apagá-la.",
+            "description": "Apagar a informação da turma.",
+            "operationId": "deleteTurmaById",
+            "parameters": [
+              {
+                "name": "idTurma",
+                "in": "path",
+                "description": "Identificador da turma a apagar.",
+                "required": true,
+                "type": "integer"
+              }
+            ],
+            "responses": {
+              "200": {
+                  "description": "A turma foi apagada."
+              },
+              "401":{
+                "description": "Falta-lhe o token de acesso ou o token não é válido."
+              },
+              "403":{
+                "description": "Não possuí nível de acesso suficiente."
+              }
+            },
+            "security": [
+              {
+                "api_key": []
+              }
+            ]
+          }
+      },
+      "/aplicacoes/turmas/{turma}/alunos":{
+        "get": {
+          "tags": [
+            "Turmas"
+          ],
+          "summary": "Dado um identifcador da turma, devolve todos os seus alunos .",
+          "description": "Devolve todos os alunos de uma turma.",
+          "operationId": "getAlunosByTurma",
+          "parameters": [
+            {
+              "name": "turma",
+              "in": "path",
+              "description": "Nome da turma.",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "Lista de alunos da turma.",
+                "schema": {
+                    "type":"array",
+                    "items": {
+                      "$ref": "#/definitions/Aluno"
+                    }   
+                }
+            },
+            "401":{
+              "description": "Falta-lhe o token de acesso ou o token não é válido."
+            },
+            "403":{
+              "description": "Não possuí nível de acesso suficiente."
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      }
+    },
+    "securityDefinitions":{
+      "api_key":{
+        "type": "apiKey",
+        "in": "query",
+        "name": "token"
+      }
+    },
+    "security": [{
+       "api_key": []
+    }],
+    "definitions": {
+        "Aluno": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "user": {
+                "type": "string"
+              },
+              "numero": {
+                "type": "integer"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "datanascimento": {
+                "type": "string"
+              },
+              "escola": {
+                "type": "string"
+              },
+              "turma":{
+                "type": "string"
+              },
+              "email":{
+                "type":"string"
+              },
+              "confirmacao":{
+                "type":"integer"
+              }
+            }
+        },
+        "Professor":{
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "codigo": {
+              "type": "string"
+            },
+            "nome": {
+              "type": "string"
+            },
+            "escola": {
+              "type": "string"
+            },
+            "email":{
+              "type":"string"
+            },
+            "confirmacao":{
+              "type":"integer"
+            },
+            "premium":{
+              "type":"integer"
+            },
+            "validade":{
+              "type":"string"
+            },
+            "socionum":{
+              "type":"integer"
+            },
+            "projeto":{
+              "type":"integer"
+            }
+          }    
+        },
+        "Turma":{
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "idprofessor": {
+              "type": "string"
+            },
+            "turma":{
+              "type":"string"
+            }
+          }
+        },
+        "Escola":{
+          "type": "object",
+          "properties": {
+            "id":{
+              "type": "integer"
+            },
+            "nome":{
+              "type":"string"
+            },
+            "localidade":{
+              "type":"string"
+            },
+            "distrito":{
+              "type":"string"
+            },
+            "pais":{
+              "type":"string"
+            },
+            "cod":{
+              "type":"string"
+            }
+          }
+        }
+    }   
+}

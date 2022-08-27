@@ -1,0 +1,84 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/tpcs",
+      "handler": "tpc.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpcs/count",
+      "handler": "tpc.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpcs/:id",
+      "handler": "tpc.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpcs/prof/:codProf",
+      "handler": "tpc.findProfTpcs",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpcs/prof/:codProf/turmas",
+      "handler": "tpc.findProfTpcsTurma",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpcs/prof/:codProf/stats",
+      "handler": "tpc.findAllTpcStats",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpcs/:tpcId/stats",
+      "handler": "tpc.findTpcStats",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/tpcs",
+      "handler": "tpc.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/tpcs/:id",
+      "handler": "tpc.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/tpcs/:id",
+      "handler": "tpc.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

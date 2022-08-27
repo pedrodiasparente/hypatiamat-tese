@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/tpc-questoes",
+      "handler": "tpc-questao.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpc-questoes/count",
+      "handler": "tpc-questao.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tpc-questoes/:id",
+      "handler": "tpc-questao.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/tpc-questoes",
+      "handler": "tpc-questao.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/tpc-questoes/:id",
+      "handler": "tpc-questao.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/tpc-questoes/:id",
+      "handler": "tpc-questao.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

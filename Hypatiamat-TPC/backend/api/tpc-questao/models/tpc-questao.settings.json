@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "tpc_questoes",
+  "info": {
+    "name": "TPC_questao",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "codQuestao": {
+      "type": "string",
+      "unique": false
+    },
+    "tpcs": {
+      "via": "tpc_questoes",
+      "collection": "tpc"
+    }
+  }
+}

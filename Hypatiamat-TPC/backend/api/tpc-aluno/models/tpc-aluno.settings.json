@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "tpc_alunos",
+  "info": {
+    "name": "TPC_aluno",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "codAluno": {
+      "type": "string"
+    },
+    "codTurma": {
+      "type": "string"
+    },
+    "resolucoes": {
+      "collection": "resolucao"
+    },
+    "tpcs": {
+      "collection": "tpc",
+      "via": "tpc_alunos"
+    },
+    "numero": {
+      "type": "integer"
+    }
+  }
+}

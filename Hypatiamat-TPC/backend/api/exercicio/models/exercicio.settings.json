@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "connection": "conhecimento",
+  "collectionName": "Base_dados",
+  "info": {
+    "name": "exercicio",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "cod": {
+      "type": "uid"
+    },
+    "questao": {
+      "type": "text"
+    },
+    "resposta1": {
+      "type": "text"
+    },
+    "resposta2": {
+      "type": "text"
+    },
+    "resposta3": {
+      "type": "string"
+    },
+    "resposta4": {
+      "type": "text"
+    },
+    "resposta5": {
+      "type": "text"
+    },
+    "resposta6": {
+      "type": "text"
+    },
+    "idexame": {
+      "type": "text"
+    },
+    "unidade": {
+      "type": "text"
+    },
+    "resolucao": {
+      "type": "text"
+    },
+    "examesn": {
+      "type": "integer"
+    },
+    "pista": {
+      "type": "text"
+    },
+    "niveldificuldade": {
+      "type": "integer"
+    },
+    "ano": {
+      "type": "integer"
+    },
+    "figura": {
+      "type": "text"
+    },
+    "tipo": {
+      "type": "integer"
+    },
+    "auxiliar": {
+      "type": "integer"
+    },
+    "tema": {
+      "type": "string"
+    },
+    "subtema": {
+      "type": "string"
+    }
+  }
+}

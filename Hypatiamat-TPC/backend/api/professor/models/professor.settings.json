@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "connection": "aplicacoes",
+  "collectionName": "professores",
+  "info": {
+    "name": "professor",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "codigo": {
+      "type": "uid",
+      "private": false
+    },
+    "nome": {
+      "type": "string"
+    },
+    "escola": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string",
+      "private": true
+    },
+    "confirmacao": {
+      "type": "integer"
+    },
+    "validade": {
+      "type": "date"
+    },
+    "premium": {
+      "type": "integer"
+    }
+  }
+}

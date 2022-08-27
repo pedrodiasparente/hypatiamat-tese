@@ -1,0 +1,28 @@
+summary: Insere um novo aluno não confirmado.
+description: |+
+  Insere um novo aluno não confirmado com as informações pretendidas.
+  
+  Todos os utilizadores podem realizar este pedido, apenas é necessário o nível mais baixo de token, ou seja, o token de interface.
+tags:
+  - Alunos
+security:
+  - tokenQuery: []
+requestBody:
+  description: 'Informação do aluno a registar.'
+  required: true
+  content:
+    application/x-www-form-urlencoded:
+      schema:
+        $ref: '#/components/schemas/AlunoPOST'
+    application/json:
+      schema:
+        $ref: '#/components/schemas/AlunoPOST'
+responses:
+  200:
+    description: Aluno registado com sucesso.
+  400:
+    $ref: '#/components/responses/InvalidParameters'
+  401:
+    $ref: '#/components/responses/UnauthorizedToken'
+  500:
+    description: Erro.

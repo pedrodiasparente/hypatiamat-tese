@@ -1,0 +1,209 @@
+{
+  "paths": {
+    "/tpcs/prof/{codProf}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tpc"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": ["Tpc"],
+        "parameters": [
+          {
+            "name": "codProf",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Tpc": {
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "tentativas": {
+            "type": "integer"
+          },
+          "ativo": {
+            "type": "integer"
+          },
+          "tagname": {
+            "type": "string"
+          },
+          "dataInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tpc_questoes": {
+            "type": "array",
+            "items": {
+              "required": ["id"],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "codQuestao": {
+                  "type": "string"
+                },
+                "tpcs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "tpc_alunos": {
+            "type": "array",
+            "items": {
+              "required": ["id"],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "nome": {
+                  "type": "string"
+                },
+                "codAluno": {
+                  "type": "string"
+                },
+                "codTurma": {
+                  "type": "string"
+                },
+                "resolucoes": {
+                  "type": "string"
+                },
+                "tpcs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "codProf": {
+            "type": "string"
+          }
+        }
+      },
+      "NewTpc": {
+        "properties": {
+          "tentativas": {
+            "type": "integer"
+          },
+          "ativo": {
+            "type": "integer"
+          },
+          "tagname": {
+            "type": "string"
+          },
+          "dataInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataFim": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tpc_questoes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tpc_alunos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "codProf": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Tpc"
+    }
+  ]
+}

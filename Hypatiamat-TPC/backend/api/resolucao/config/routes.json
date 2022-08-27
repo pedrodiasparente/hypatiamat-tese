@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/resolucoes",
+      "handler": "resolucao.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/resolucoes/count",
+      "handler": "resolucao.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/resolucoes/:id",
+      "handler": "resolucao.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/resolucoes",
+      "handler": "resolucao.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/resolucoes/:id",
+      "handler": "resolucao.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/resolucoes/:id",
+      "handler": "resolucao.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

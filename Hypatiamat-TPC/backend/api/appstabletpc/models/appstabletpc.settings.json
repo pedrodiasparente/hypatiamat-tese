@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "connection": "conhecimento",
+  "collectionName": "appstabletpc",
+  "info": {
+    "name": "appstabletpc"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nome": {
+      "type": "text"
+    },
+    "tabela": {
+      "type": "text"
+    },
+    "codtema": {
+      "type": "integer"
+    },
+    "subtmp": {
+      "type": "integer"
+    },
+    "codsubtema": {
+      "type": "integer"
+    }
+  }
+}

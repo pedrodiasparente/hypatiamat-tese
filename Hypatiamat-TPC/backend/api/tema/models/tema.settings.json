@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "connection": "conhecimento",
+  "collectionName": "subtemas",
+  "info": {
+    "name": "tema",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "tema": {
+      "type": "string"
+    },
+    "subtema": {
+      "type": "string"
+    },
+    "codtema": {
+      "type": "string"
+    },
+    "codsubtema": {
+      "type": "string"
+    }
+  }
+}

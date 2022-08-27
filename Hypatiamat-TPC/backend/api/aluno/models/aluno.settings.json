@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "connection": "aplicacoes",
+  "collectionName": "alunos",
+  "info": {
+    "name": "aluno",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "datanascimento": {
+      "type": "string"
+    },
+    "turma": {
+      "type": "string"
+    },
+    "pais": {
+      "type": "string"
+    },
+    "numero": {
+      "type": "integer"
+    },
+    "codprofessor": {
+      "type": "string"
+    },
+    "user": {
+      "type": "uid"
+    },
+    "email": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "escola": {
+      "type": "string"
+    }
+  }
+}

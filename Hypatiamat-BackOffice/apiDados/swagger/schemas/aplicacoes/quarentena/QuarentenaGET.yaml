@@ -1,0 +1,12 @@
+type: object
+properties:
+  id: 
+    type: integer
+  codigo:
+    type: string
+  nome:
+    type: string
+  escola:
+    type: string
+  email:
+    type: string

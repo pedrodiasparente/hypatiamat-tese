@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "respostas",
+  "info": {
+    "name": "Resposta",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "codQuestao": {
+      "type": "string"
+    },
+    "resposta": {
+      "type": "text"
+    },
+    "correta": {
+      "type": "integer"
+    }
+  }
+}

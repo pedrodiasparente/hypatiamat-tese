@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "resolucoes",
+  "info": {
+    "name": "Resolucao",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "populateCreatorFields": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "qRespondidas": {
+      "type": "integer"
+    },
+    "qCertas": {
+      "type": "integer"
+    },
+    "classificacao": {
+      "type": "decimal"
+    },
+    "respostas": {
+      "collection": "resposta"
+    },
+    "data": {
+      "type": "datetime"
+    },
+    "idTpc": {
+      "type": "integer"
+    },
+    "tentativa": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+summary: Devolve todos os alunos pertencentes a uma escola.
+description: |+
+  Devolve todos os alunos que pertencem a uma determinada escola.
+  
+  Apenas o administrador, o município pertencente à escola e a respetiva escola podem executar este pedido.
+tags:
+  - Escolas
+security:
+  - tokenQuery: []
+parameters:
+  - in: path
+    name: codigo
+    schema:
+      type: string
+    description: "Código do Agrupamento a ser consultado."
+    required: true
+responses:
+  200:
+    description: Lista de todos os alunos de uma escola.
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/EscolaAlunosGET'
+  401:
+    $ref: '#/components/responses/UnauthorizedToken'
+  403:
+    $ref: '#/components/responses/PermissionsUser'
+  500:
+    description: Erro.

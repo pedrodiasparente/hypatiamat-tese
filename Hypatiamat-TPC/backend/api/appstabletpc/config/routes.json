@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/appstabletpcs",
+      "handler": "appstabletpc.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appstabletpcs/count",
+      "handler": "appstabletpc.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appstabletpcs/:id",
+      "handler": "appstabletpc.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/appstabletpcs",
+      "handler": "appstabletpc.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/appstabletpcs/:id",
+      "handler": "appstabletpc.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/appstabletpcs/:id",
+      "handler": "appstabletpc.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
